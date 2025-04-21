@@ -5,7 +5,7 @@
 Dado un modelo de base de datos de una universidad, identificar violaciones posibles a la integridad
 referencial si se elimina un estudiante con cursos inscritos. ¿Que mecanismos usarias para evitarlo?
 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS universidad;
 USE universidad;
 
@@ -28,9 +28,11 @@ Usariamos `ON DELETE RESTRICT` para evitar que se elimine un estudiante con curs
 
 ### Ejercicio 2: Implementación de Restricciones
 
-Crear una tabla Matriculas con restricciones de clave foranea. Luego, insertar datos que violen la integridad y mostrar el error generado.
+Crear una tabla Matriculas con restricciones de clave foranea( creada arriba ). Luego, insertar datos que violen la integridad y mostrar el error generado.
 
-`INSERT INTO Matriculas (id, id_estudiante, curso) VALUES (1, 99, 'SQL');`
+```sql
+INSERT INTO Matriculas (id, id_estudiante, curso) VALUES (1, 99, 'SQL');
+```
 
 > 09:52:58	INSERT INTO Matriculas (id, id_estudiante, curso) VALUES (1, 99, 'SQL')	Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`universidad`.`matriculas`, CONSTRAINT `matriculas_ibfk_1` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiantes` (`id`) ON DELETE RESTRICT)	0.000 sec
 
@@ -39,7 +41,7 @@ Crear una tabla Matriculas con restricciones de clave foranea. Luego, insertar d
 Simular una situación donde dos usuarios intentan actualizar el mismo saldo de una cuenta bancaria.
 Analizar cómo afectan las condiciones de aislamiento (READ COMMITTED vs SERIALIZABLE).
 
-```
+```sql
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
     id INT PRIMARY KEY,
@@ -66,7 +68,7 @@ COMMIT;
 
 Ahora con `SERIALIZABLE`
 
-```
+```sql
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
     id INT PRIMARY KEY,
@@ -93,7 +95,7 @@ COMMIT;
 ### Ejercicio 4: Plan de Ejecución
 Usar una base de datos con más de 100,000 registros. Ejecutar una consulta sin  ́ındice y luego con ındice. Usar EXPLAIN para comparar rendimiento.
 
-```
+```sql
 DROP TABLE IF EXISTS Datos;
 CREATE TABLE Datos (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -122,7 +124,7 @@ EXPLAIN SELECT * FROM Datos WHERE valor = 98765;
 ### Ejercicio 5: Creación de  ́Indices
 Diseñar una consulta que filtre por múltiples campos. Crear diferentes  ́ındices y medir cuál ofrece mejor rendimiento.
 
-```
+```sql
 SELECT * FROM datos WHERE id = 2 OR valor = 9035 OR texto = "Texto 9909";
 
 ALTER TABLE datos ADD INDEX idx_texto(texto);
@@ -136,7 +138,7 @@ EXPLAIN ANALYZE SELECT * FROM datos WHERE id = 2 OR valor = 9035 OR texto = "Tex
 ### Ejercicio 6: Vistas
 Crear una vista que resuma las ventas mensuales por producto. Luego, usarla en una consulta que devuelva los 5 productos más vendidos.
 
-```
+```sql
 # Creacion tabla Ventas
 DROP TABLE IF EXISTS Ventas;
 CREATE TABLE Ventas (
@@ -160,7 +162,7 @@ SELECT
 FROM Numbers a, Numbers b
 WHERE (a.num + b.num*10) BETWEEN 1 AND 10000;
 ```
-```
+```sql
 # Creacion tabla Productos
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
@@ -178,7 +180,7 @@ FROM (
 ) AS sub;
 ```
 
-```
+```sql
 # Creacion Vista
 
 DROP VIEW IF EXISTS VentasMensuales;
@@ -191,7 +193,7 @@ SELECT
 FROM Ventas
 GROUP BY producto_id, DATE_FORMAT(fecha, '%Y-%m');
 ```
-```
+```sql
 # Consulta usando la vista:
 # Se unen los datos de VentasMensuales con la tabla Productos para obtener nombres
 # Luego se listan los 5 productos con mayor cantidad total vendida (en todas las fechas, o se puede filtrar por mes)
@@ -207,7 +209,7 @@ LIMIT 5;
 Crear un usuario analista que solo pueda hacer SELECT en ciertas tablas. Intentar insertar desde
 ese usuario y explicar el resultado.
 
-```
+```sql
 CREATE USER 'analista'@'localhost' IDENTIFIED BY 'clave123';
 
 GRANT SELECT ON optimizaciondb.Datos TO 'analista'@'localhost';
@@ -222,7 +224,7 @@ Al querer insertar datos usando un usuario que solo puede hacer select en dicha 
 Simular una auditoría simple con triggers que registren toda modificación en una tabla Clientes.
 
 
-```
+```sql
 # Se crean las tablas de Clientes y Auditoria de clientes
 CREATE TABLE clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -241,7 +243,7 @@ CREATE TABLE auditoria_clientes (
 );
 ```
 
-```
+```sql
 # Se crea el Trigger
 DELIMITER $$
 
@@ -265,7 +267,7 @@ END$$
 DELIMITER ;
 ```
 
-```
+```sql
 # Prueba del Trigger
 INSERT INTO clientes (nombre, email) VALUES ('Lionel Messi', 'liomessi@example.com');
 
@@ -299,7 +301,7 @@ Modificar la base de datos
 
 Traer el backup que hicimos para sobrescribir la base de datos que modificamos(mostrado en la imagen anterior)
 
-````
+```
 mysql -u root -p ecomerce < $DIRECCIONDESTINO/ARCHIVOCREADO.sql
 ```
 
