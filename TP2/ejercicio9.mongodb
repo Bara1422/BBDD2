@@ -1,0 +1,11 @@
+// ----------Ejercicio 9:----------
+
+// Replicación y sharding (teórico) Describe con tus palabras las ventajas de usar un Replica Set y qué beneficios aporta el sharding en una base de datos de alto volumen.
+
+// Replica Set: 
+// Tiene una gran disponibilidad ya que al ser un conjunto de nodos, si falla uno, los demás se encargan de mantener la integridad de la base de datos.
+// Tiene una buena buena tolerancia a fallos
+
+// Sharding
+// Al dividir la base de datos en partes, se puede distribuir la carga de trabajo entre los nodos.
+// Genera un mayor rendimiento en en las consultas ya que se distribuyen entre los nodos.

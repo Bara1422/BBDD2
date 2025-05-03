@@ -174,16 +174,16 @@ db.ventas.aggregate([
 
 db.ventas.aggregate([
   {
-    $project: {
-      _id: 0,
-      mes: { $month: "$fecha" },
-      totalVendido: 1,
+    $group: {
+      _id: {$month: "$fecha"},
+      totalVendido: { $sum: "$total" },
     },
   },
   {
-    $group: {
-      _id: "$mes",
-      totalVendido: { $sum: "$totalVendido" },
+    $project: {
+      _id: 0,
+      mes: "$_id",
+      totalVendido: 1,
     },
   },
   {
@@ -192,6 +192,7 @@ db.ventas.aggregate([
     },
   },
 ]);
+
 
 
 // Encontrar el día de la semana con más ventas.
@@ -219,3 +220,4 @@ db.ventas.aggregate([
     $limit: 1
   }
 ]) 
+

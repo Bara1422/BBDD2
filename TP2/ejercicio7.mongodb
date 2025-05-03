@@ -1,0 +1,48 @@
+// ----------Ejercicio 7:----------
+// Referencias Crea una colección cursos y una colección alumnos. Luego inserta documentos donde los alumnos tengan una lista de id_curso referenciando a los cursos.
+use("empresa");
+
+db.cursos.insertMany([
+    {
+        id: 1,
+        nombre: "Desarrollo web",
+        duracion: 6,
+        fecha_inicio: "2025-01-01",
+        fecha_fin: "2025-06-30"
+    },
+    {
+        id: 2,
+        nombre: "Desarrollo movil",
+        duracion: 6,
+        fecha_inicio: "2025-01-01",
+        fecha_fin: "2025-06-30"
+    },
+    {
+        id: 3,
+        nombre: "Desarrollo backend",
+        duracion: 6,
+        fecha_inicio: "2025-01-01",
+        fecha_fin: "2025-06-30"
+    }
+])
+
+db.alumnos.insertMany([
+    {
+        id: 1,
+        nombre: "Carlos Ruiz",
+        edad: 35,
+        id_cursos: [1, 2]
+    },
+    {
+        id: 2,
+        nombre: "María Torres",
+        edad: 42,
+        id_cursos: [2, 3]
+    },
+    {
+        id: 3,
+        nombre: "Javier Méndez",
+        edad: 30,
+        id_cursos: [1, 3]
+    }
+])

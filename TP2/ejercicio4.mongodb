@@ -1,0 +1,10 @@
+
+// ----------Ejercicio 4:----------
+// Documentos embebidos Agrega un campo direccion que incluya calle, ciudad y codigo_postal.
+use("empresa");
+
+db.empleados.updateMany(
+    {},
+    { $set: { direccion: { calle: {}, ciudad: {}, codigo_postal: {} } } }
+  );
+  db.empleados.find();
