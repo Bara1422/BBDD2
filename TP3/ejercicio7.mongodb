@@ -1,0 +1,49 @@
+// Ejercicio 7: Operadores condicionales
+// Objetivo:
+// Utilizar operadores condicionales en el pipeline.
+// Etapas del Pipeline:
+// $project, $group
+
+// Clasificar los productos según su precio: "Económico" (<100), "Estándar" (100-500), "Premium" (>500).
+use("tiendaOnline");
+db.productos.aggregate([
+  {
+    $project: {
+      _id: 0,
+      nombre: 1,
+      precio: 1,
+      clasificacion: {
+        $cond: [
+          { $lt: ["$precio", 200] },
+          "Economico",
+          {
+            $cond: [{ $lte: ["$precio", 800] }, "Estándar", "Premium"],
+          },
+        ],
+      },
+    },
+  },
+]);
+
+// Clasificar las ventas según su total: "Pequeña" (<200), "Mediana" (200-800), "Grande" (>800).
+
+use("tiendaOnline");
+db.ventas.find();
+db.ventas.aggregate([
+  {
+    $project: {
+      _id: 0,
+      id_venta: "$_id",
+      total: 1,
+      clasificacion: {
+        $cond: [
+          { $lt: ["$total", 200] },
+          "Pequeña",
+          {
+            $cond: [{ $lte: ["$total", 800] }, "Mediana", "Grande"],
+          },
+        ],
+      },
+    },
+  },
+]);

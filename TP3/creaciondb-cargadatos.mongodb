@@ -1,7 +1,8 @@
 // Paso 1: Crear Base de Datos y Colección
 // Ejecuta los siguientes comandos en la consola de MongoDB para crear una base de datos llamada "tiendaOnline":
-use("tiendaOnline");
-
+use("tiendaOnlinee");
+db.productos.find()
+db.ventas.find()
 // Paso 2: Importar Datos de Muestra
 // Copia y ejecuta el siguiente script para insertar datos de muestra:
 
