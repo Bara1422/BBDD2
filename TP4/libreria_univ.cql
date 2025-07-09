@@ -20,18 +20,18 @@ CREATE (lib2: Libro {nombre: "Derecho laboral"});
 CREATE (lib3: Libro {nombre: "Álgebra avanzada"});
 CREATE (lib4: Libro {nombre: "Manual de Fórmulas Técnicas"});
 
-// Creacion de relaciones entre estudiantes y carreras
+// Creacion de relacion CURSA entre estudiantes y carreras
 MATCH (est1: Estudiantes {nombre: "Carlos"}) WITH est1 MATCH (carr1: Carrera {nombre: "Ingeniería Química"}) CREATE (est1)-[:CURSA]->(carr1);
 MATCH (est2: Estudiantes {nombre: "Soledad"}) WITH est2 MATCH (carr2: Carrera {nombre: "Abogacía"}) CREATE (est2)-[:CURSA]->(carr2);
 MATCH (est3: Estudiantes {nombre: "Cristian"}) WITH est3 MATCH (carr3: Carrera {nombre: "Arquitectura"}) CREATE (est3)-[:CURSA]->(carr3);
 
-// Creacion de relaciones entre libros y categorias
+// Creacion de relacion PERTENECE_A entre libros y categorias
 MATCH (lib1: Libro {nombre: "Arquitectura gótica"}) WITH lib1 MATCH (cat3: Categoria {nombre: "Diseño"}) CREATE (lib1)-[:PERTENECE_A]->(cat3);
 MATCH (lib2: Libro {nombre: "Derecho laboral"}) WITH lib2 MATCH (cat2: Categoria {nombre: "Derecho"}) CREATE (lib2)-[:PERTENECE_A]->(cat2);
 MATCH (lib3: Libro {nombre: "Álgebra avanzada"}) WITH lib3 MATCH (cat4: Categoria {nombre: "Matemáticas"}) CREATE (lib3)-[:PERTENECE_A]->(cat4);
 MATCH (lib4: Libro {nombre: "Manual de Fórmulas Técnicas"}) WITH lib4 MATCH (cat1: Categoria {nombre: "Ingeniería"}) CREATE (lib4)-[:PERTENECE_A]->(cat1);
 
-// Creacion de prestamos
+// Creación de  la relación PRESTAMO entre estudiantes y libros
 MATCH (est1: Estudiantes {nombre: "Carlos"}) 
 WITH est1 
 MATCH (lib4: Libro {nombre: "Manual de Fórmulas Técnicas"}) 
