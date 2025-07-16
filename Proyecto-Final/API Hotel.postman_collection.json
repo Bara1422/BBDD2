@@ -11,19 +11,30 @@
 			"item": [
 				{
 					"name": "Traer Habitaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/habitaciones/1",
+							"raw": "http://localhost:3000/habitaciones",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"habitaciones",
-								"1"
+								"habitaciones"
 							]
 						}
 					},
@@ -31,9 +42,21 @@
 				},
 				{
 					"name": "Traer Habitacion Numero",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/habitaciones/1",
 							"protocol": "http",
@@ -56,7 +79,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"numero\": 1,\r\n    \"tipo\": \"Simple\",\r\n    \"precioPorNoche\": 122,\r\n    \"capacidad\": 4,\r\n    \"amenidades\": [\"Wifi\", \"TV\"]\r\n}",
+							"raw": "{\r\n    \"numero\": 2,\r\n    \"tipo\": \"Simple\",\r\n    \"precioPorNoche\": 122,\r\n    \"capacidad\": 4,\r\n    \"amenidades\": [\"Wifi\", \"TV\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tipo\": \"Doble\",\r\n    \"amenidades\": [\"hola\", \"chau\"],\r\n    \"capacidad\": \"5\"\r\n}",
+							"raw": "{\r\n    \"tipo\": \"Doble\",\r\n    \"amenidades\": [\"TV\", \"Camas Dobles\"],\r\n    \"capacidad\": \"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,10 +136,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"numero\": 7,\r\n    \"tipo\": \"Simple\",\r\n    \"precioPorNoche\": 1,\r\n    \"capacidad\": 4,\r\n    \"amenidades\": [\"Wifi\", \"TV\"]\r\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/habitaciones/1",
+							"raw": "http://localhost:3000/habitaciones/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -124,7 +147,7 @@
 							"port": "3000",
 							"path": [
 								"habitaciones",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -142,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"numeroHabitacion\": \"2\",\r\n  \"huesped\": {  \r\n    \"nombre\": \"Sergio Ismael\",\r\n    \"email\": \"marina@email.com\",\r\n    \"telefono\": \"+1234567890\"\r\n    },\r\n  \"fechaEntrada\": \"2025-07-24\",\r\n  \"fechaSalida\": \"2025-07-28\",\r\n  \"fechaReserva\": \"2025-07-13\",\r\n  \"__v\": 0\r\n}",
+							"raw": "{\r\n  \"numeroHabitacion\": \"2\",\r\n  \"huesped\": {  \r\n    \"nombre\": \"Lionel Messi6\",\r\n    \"email\": \"liomessi@email.com\",\r\n    \"telefono\": \"234291313\"\r\n    },\r\n  \"fechaEntrada\": \"2025-08-24\",\r\n  \"fechaSalida\": \"2025-08-28\",\r\n  \"fechaReserva\": \"2025-08-13\",\r\n  \"__v\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -167,25 +190,9 @@
 					"name": "Disponibilidad Reserva",
 					"request": {
 						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Traer Reservas",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar Reserva",
-					"request": {
-						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/reservas/",
+							"raw": "http://localhost:3000/reservas/disponibilidad?fechaEntrada=2025-07-24&fechaSalida=2025-07-27&tipo=Doble",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -193,21 +200,31 @@
 							"port": "3000",
 							"path": [
 								"reservas",
-								""
+								"disponibilidad"
+							],
+							"query": [
+								{
+									"key": "fechaEntrada",
+									"value": "2025-07-24"
+								},
+								{
+									"key": "fechaSalida",
+									"value": "2025-07-27"
+								},
+								{
+									"key": "tipo",
+									"value": "Doble"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Cancelar Reserva",
+					"name": "Traer Reservas",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"numeroHabitacion\": \"2\",\r\n  \"huesped\": {  \r\n    \"nombre\": \"Sergio Ismael\",\r\n    \"email\": \"marina@email.com\",\r\n    \"telefono\": \"+1234567890\"\r\n    },\r\n  \"fechaEntrada\": \"2025-07-24\",\r\n  \"fechaSalida\": \"2025-07-28\",\r\n  \"fechaReserva\": \"2025-07-13\",\r\n  \"__v\": 0\r\n}"
-						},
 						"url": {
 							"raw": "http://localhost:3000/reservas",
 							"protocol": "http",
@@ -223,12 +240,57 @@
 					"response": []
 				},
 				{
+					"name": "Eliminar Reserva",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/reservas/6876f5045f7105da851dd2eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservas",
+								"6876f5045f7105da851dd2eb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Reserva",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numeroHabitacion\": \"2\",\r\n  \"huesped\": {  \r\n    \"nombre\": \"Sergio Ismael\",\r\n    \"email\": \"marina@email.com\",\r\n    \"telefono\": \"+1234567890\"\r\n    },\r\n  \"fechaEntrada\": \"2025-07-24\",\r\n  \"fechaSalida\": \"2025-07-28\",\r\n  \"fechaReserva\": \"2025-07-13\",\r\n  \"__v\": 0\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/reservas/cancelar/68781c82723a450c8e9ef64e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservas",
+								"cancelar",
+								"68781c82723a450c8e9ef64e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CheckIn Reserva",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/reservas/checkin/68781c82723a450c8e9ef64e",
+							"raw": "http://localhost:3000/reservas/checkin/687816c2cb1424dd8982f050",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -237,7 +299,7 @@
 							"path": [
 								"reservas",
 								"checkin",
-								"68781c82723a450c8e9ef64e"
+								"687816c2cb1424dd8982f050"
 							]
 						}
 					},
@@ -247,7 +309,29 @@
 					"name": "Reporte Ocupacion Reservas",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/reservas/reporte-ocupacion?mes=07&anio=2025",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reservas",
+								"reporte-ocupacion"
+							],
+							"query": [
+								{
+									"key": "mes",
+									"value": "07"
+								},
+								{
+									"key": "anio",
+									"value": "2025"
+								}
+							]
+						}
 					},
 					"response": []
 				}
