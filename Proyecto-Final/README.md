@@ -5,6 +5,8 @@
 **Proyecto 5: Sistema de Reservas de Hotel**  
 Plataforma para gestionar habitaciones, huéspedes y reservas de un hotel.
 
+---
+
 ## 👥 Integrantes del grupo (Grupo 11)
 
 - Juan Baranovsky
@@ -13,10 +15,14 @@ Plataforma para gestionar habitaciones, huéspedes y reservas de un hotel.
 - Jesica Pellegrini
 - Francisco Ríos
 
+---
+
 ## 💻 Tecnología utilizada
 
 **Node.js con Mongoose (MongoDB)**
 **Interface de uso: API**
+
+---
 
 ## 🚀 Pasos para ejecutar el proyecto
 
@@ -38,7 +44,7 @@ Plataforma para gestionar habitaciones, huéspedes y reservas de un hotel.
    npm install
    ```
 
-4. Cargar datos iniciales con seed
+4. Cargar datos iniciales de Habitaciones con seed
 
    ```bash
    npm run seed
@@ -336,17 +342,18 @@ Si siguieron el paso a paso hay que volver a crear una reserva y tambien ejecuta
 }
 ```
 
-
 ### 💥 Posible error mongo
 
 en config/db.js modificar la linea
+
 ```javascript
-await mongoose.connect('mongodb://127.0.0.1:27017/hotel-reservas');
+await mongoose.connect("mongodb://127.0.0.1:27017/hotel-reservas");
 ```
 
 por esta otra
+
 ```javascript
-await mongoose.connect('mongodb://localhost/hotel-reservas');
+await mongoose.connect("mongodb://localhost/hotel-reservas");
 ```
 
 No me funcionaba si no ponia **127.0.0.1**

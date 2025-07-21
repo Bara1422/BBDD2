@@ -39,8 +39,8 @@ class ReservasController {
       throw new Error("Fecha de salida debe ser mayor a fecha de entrada");
     }
 
-    const diffMs = salida - entrada;
-    const noches = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    const tiempoEstadiaMs = salida - entrada;
+    const noches = Math.ceil(tiempoEstadiaMs / (1000 * 60 * 60 * 24));
 
     const reservasExistentes = await Reserva.find({
       habitacionId: habitacion._id,
@@ -104,13 +104,12 @@ class ReservasController {
     const reservasMes = await Reserva.find({
       estado: "confirmada",
       $or: [
-        { fechaEntrada: { $gte: inicioMes, $lte: finMes } },
-        { fechaSalida: { $gte: inicioMes, $lte: finMes } },
+        { fechaEntrada: { $lte: finMes } },
+        { fechaSalida: { $gte: inicioMes } },
       ],
     }).populate("habitacionId");
 
     const totalHabitaciones = await Habitacion.countDocuments();
-    
     if (totalHabitaciones === 0) {
       throw new Error("No hay habitaciones registradas");
     }
@@ -123,8 +122,8 @@ class ReservasController {
       const salida =
         reserva.fechaSalida > finMes ? finMes : reserva.fechaSalida;
 
-      const diff = (salida - entrada) / (1000 * 60 * 60 * 24);
-      nochesOcupadas += diff;
+      const diferenciaEnMs = (salida - entrada) / (1000 * 60 * 60 * 24);
+      nochesOcupadas += diferenciaEnMs;
     });
 
     const diasMes = finMes.getDate();
@@ -139,7 +138,9 @@ class ReservasController {
       nochesOcupadas,
       totalHabitaciones,
       porcentajeOcupacion: porcentajeOcupacion.toFixed(2) + "%",
-      mensaje: `Reporte de ocupación para el mes ${mes} del año ${anio} - ${nochesOcupadas} noches ocupadas de ${totalHabitaciones * diasMes} noches posibles (habitaciones totales * dias del mes).`,
+      mensaje: `Reporte de ocupación para el mes ${mes} del año ${anio} - ${nochesOcupadas} noches ocupadas de ${
+        totalHabitaciones * diasMes
+      } noches posibles (habitaciones totales * dias del mes).`,
     };
   }
 

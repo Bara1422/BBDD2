@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const conectarDB = require('./config/db');
-const reservasController = require('./controllers/reservasController');
 const habitacionRoutes = require('./routes/habitacion.routes');
 const reservasRoutes = require('./routes/reservas.routes');
 const app = express();
